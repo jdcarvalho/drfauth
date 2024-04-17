@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app_api.apps.AppApiConfig',
+    'drf_yasg',
+    'rest_framework',
+    'rest_auth',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +127,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# one hour
+API_TOKEN_SECONDS_EXPIRATION = 60 * 60 * 12
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [],
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'app_api.mixins.token.ExpiringTokenAuthentication',
+    ]
+}
+
+LOGIN_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
