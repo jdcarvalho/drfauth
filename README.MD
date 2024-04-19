@@ -17,3 +17,35 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 Special thanks to the Django and Django Rest Framework communities for their excellent documentation and resources.
+
+## Testing this project
+
+### Create a new environment for the project (all fixtures will be loaded post migrate)
+```shell
+python3.x -m venv venv
+source ./venv/bin/activate
+pip install --upgrade pip
+pip install --upgrade setuptools
+pip install --upgrade wheel
+pip install -r requirements.txt
+```
+
+### Make migrations, migrate and create a new superuser:
+
+```shell
+./manage.py makemigrations
+```
+```shell
+./manage.py migrate
+```
+```shell
+./manage.py createsuperuser
+```
+
+### Run the application then login
+
+```shell
+./manage.py runserver
+```
+
+### Use cURL, Postman or python-requests to test the API
