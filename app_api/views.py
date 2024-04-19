@@ -44,32 +44,20 @@ class AuthAPIView(APIView, TokenAPIMixin):
         tags=['Authentication'],
     )
     def post(self, request):
-        """
-        Do system's authentication and with correct credentials returns
-        user serialized object
-        """
         login_serializer = UserLoginSerializer(data=request.data)
         if not login_serializer.is_valid():
             return Response(
-                login_serializer.errors,
-                status=status.HTTP_400_BAD_REQUEST
-            )
+                login_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         try:
             user = authenticate(
                 username=login_serializer.data.get('username', ''),
-                password=login_serializer.data.get('password', '')
-            )
+                password=login_serializer.data.get('password', ''))
             if not user:
-                return Response(
-                    {'error': 'Invalid login credentials'},
-                    status=status.HTTP_401_UNAUTHORIZED
-                )
+                return Response({'error': 'Invalid login credentials'},
+                                status=status.HTTP_401_UNAUTHORIZED)
         except Exception as e:
-            return Response(
-                {'error': str(e)},
-                status=status.HTTP_401_UNAUTHORIZED
-            )
-
+            return Response({'error': str(e)},
+                            status=status.HTTP_401_UNAUTHORIZED)
         token, created = Token.objects.get_or_create(user=user)
         is_expired, token, left_time = self._handle_expiration(token)
         user_serialized = UserListSerializer(user)
