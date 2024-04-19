@@ -47,7 +47,7 @@ class ExpiringTokenAuthentication(TokenAuthentication, TokenAPIMixin):
         if not token.user.is_active:
             raise AuthenticationFailed("The user is not active")
 
-        is_expired, token = self._handle_expiration(token)
+        is_expired, token, left_time = self._handle_expiration(token)
         if is_expired:
             raise AuthenticationFailed("The Token is expired")
         return token.user, token
