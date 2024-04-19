@@ -128,7 +128,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# one hour
+# twelve hours
 API_TOKEN_SECONDS_EXPIRATION = 60 * 60 * 12
 
 REST_FRAMEWORK = {
