@@ -11,7 +11,6 @@ from app_api.serializers import CountrySerializer, UserLoginSerializer, \
 from rest_framework.authtoken.models import Token
 
 
-# Create your views here.
 class CountryListView(APIView):
 
     permission_classes = [
@@ -72,11 +71,11 @@ class AuthAPIView(APIView, TokenAPIMixin):
             )
 
         token, created = Token.objects.get_or_create(user=user)
-        is_expired, token = self._handle_expiration(token)
+        is_expired, token, left_time = self._handle_expiration(token)
         user_serialized = UserListSerializer(user)
         return Response({
             'user': user_serialized.data,
-            'expires_in': self._expires_in(token),
+            'expires_in': left_time,
             'access_token': token.key,
         }, status=status.HTTP_200_OK)
 
