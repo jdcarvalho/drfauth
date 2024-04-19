@@ -49,3 +49,6 @@ pip install -r requirements.txt
 ```
 
 ### Use cURL, Postman or python-requests to test the API
+
+![Image](https://raw.githubusercontent.com/jdcarvalho/drfauth/master/static/img/swagger.png)
+
