@@ -30,7 +30,7 @@ pip install --upgrade wheel
 pip install -r requirements.txt
 ```
 
-### Make migrations, migrate and create a new superuser:
+### Make migrations, migrate and then create a new superuser:
 
 ```shell
 ./manage.py makemigrations
